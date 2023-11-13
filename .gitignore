@@ -4,4 +4,4 @@ allure-report
 cypress/screenshots
 cypress/videos
 cypress/downloads
-mochawesome-report
+cypress/mochawesome-report
