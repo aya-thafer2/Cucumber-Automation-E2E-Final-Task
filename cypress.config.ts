@@ -19,6 +19,15 @@ export default defineConfig({
         })
       );
       return config;
+    }, env: {
+      // allureReuseAfterSpec: true,
+      // download_dir: "./cypress/downloads",
+      snapshotOnly: true,
+      // allure: true,
     },
+    // allure: true,
+    // allureResultsPath: "allure-results",
+    // videosFolder: "allure-results/",
+    // screenshotOnRunFailure: true,
   },
 });
