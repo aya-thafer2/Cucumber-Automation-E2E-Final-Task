@@ -2,6 +2,7 @@
   "devDependencies": {
     "@faker-js/faker": "^8.2.0",
     "cypress": "^13.5.0",
+    "cypress-mochawesome-reporter": "^3.6.1",
     "typescript": "^5.2.2"
   },
   "dependencies": {
