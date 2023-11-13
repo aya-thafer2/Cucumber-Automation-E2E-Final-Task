@@ -1,11 +1,11 @@
 import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor';
-import AddEmployeeDialogHelper from '../../support/helpers/PIM-page/add-employee-dialog/add-employee-dialog-helper';
-import GenericHelper from '../../support/helpers/common-helpers/generic-helpers/generic-helper';
-import JobDialogHelper from '../../support/helpers/admin-page/job-dialog/job-dialog-helper';
-import AddVacancyHelper from '../../support/helpers/recruitment-page/add-vacancy-dialog/add-vacancy-helper';
-import AddCandidateHelper from '../../support/helpers/recruitment-page/add-candidate-dialog/add-candidate-helper';
-import CandidateFormHelper from '../../support/helpers/recruitment-page/candidate-form-dialog/candidate-form-helper';
-import CandidateFormDialog from '../../support/POM/recruitment-page/candidates-tab/candidate-form-dialog/candidate-form-dialog';
+import AddEmployeeDialogHelper from '../../../support/helpers/PIM-page/add-employee-dialog/add-employee-dialog-helper';
+import GenericHelper from '../../../support/helpers/common-helpers/generic-helpers/generic-helper';
+import JobDialogHelper from '../../../support/helpers/admin-page/job-dialog/job-dialog-helper';
+import AddVacancyHelper from '../../../support/helpers/recruitment-page/add-vacancy-dialog/add-vacancy-helper';
+import AddCandidateHelper from '../../../support/helpers/recruitment-page/add-candidate-dialog/add-candidate-helper';
+import CandidateFormHelper from '../../../support/helpers/recruitment-page/candidate-form-dialog/candidate-form-helper';
+import CandidateFormDialog from '../../../support/POM/recruitment-page/candidates-tab/candidate-form-dialog/candidate-form-dialog';
 
 Given('the Employee, Job Title and Vacancy are created', () => {
   //Admin login 
