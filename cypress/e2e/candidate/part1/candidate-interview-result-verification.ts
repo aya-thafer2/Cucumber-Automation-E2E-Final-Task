@@ -7,7 +7,7 @@ import AddCandidateHelper from '../../../support/helpers/recruitment-page/add-ca
 import CandidateFormHelper from '../../../support/helpers/recruitment-page/candidate-form-dialog/candidate-form-helper';
 import CandidateFormDialog from '../../../support/POM/recruitment-page/candidates-tab/candidate-form-dialog/candidate-form-dialog';
 
-Given('the Employee, Job Title and Vacancy are created', () => {
+beforeEach('the Employee, Job Title and Vacancy are created', () => {
   //Admin login 
   GenericHelper.adminLogin()
   //Add new Employee
@@ -18,10 +18,10 @@ Given('the Employee, Job Title and Vacancy are created', () => {
     AddVacancyHelper.addVacancy();
   })
 });
-Given('the candidate status is {string}', (status: string) => {
+beforeEach('the candidate status is Interview Scheduled', () => {
   //create candidate + shortlist + scheduled
   AddCandidateHelper.prepareCandidateForInterview().then(() => {
-    AddCandidateHelper.checkApplicationStageStatus(status);
+    AddCandidateHelper.checkApplicationStageStatus('Interview Scheduled');
   })
   AddEmployeeDialogHelper.logout();
 });
