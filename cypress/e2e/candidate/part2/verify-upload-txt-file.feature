@@ -13,6 +13,7 @@ Feature: Verify that the user can upload a txt file for Application Initiated an
 
     Scenario: Verify the Resume Upload and Download Process for status "Hired"
 
+        Given the candidate status is Hired
         When the Admin logs in to the system
         And the Admin accesses the candidate form
 

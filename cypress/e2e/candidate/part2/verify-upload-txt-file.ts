@@ -27,6 +27,7 @@ beforeEach('the candidate status is Application Initiated', () => {
   AddEmployeeDialogHelper.logout();
 })
 Given('the candidate status is Hired', () => {
+  GenericHelper.adminLogin()
   //hire candidate
   AddCandidateHelper.hireCandidate().then(() => {
     AddCandidateHelper.checkApplicationStageStatus('Hired');
@@ -60,14 +61,14 @@ Then("the downloaded file content should match the uploaded data", () => {
   CandidateFormHelper.verifyFileContent();
 });
 
-afterEach(() => {
-  //delete employee
-  AddEmployeeDialogHelper.deleteEmployee()
-  //delete job title
-  JobDialogHelper.deleteJobTitle();
-  //delete vacancy
-  AddVacancyHelper.deleteVacancy();
-  //delete candidate
-  AddCandidateHelper.deleteCandidate();
-});
+// afterEach(() => {
+//   //delete employee
+//   AddEmployeeDialogHelper.deleteEmployee()
+//   //delete job title
+//   JobDialogHelper.deleteJobTitle();
+//   //delete vacancy
+//   AddVacancyHelper.deleteVacancy();
+//   //delete candidate
+//   AddCandidateHelper.deleteCandidate();
+// });
 

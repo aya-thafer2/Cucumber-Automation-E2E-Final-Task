@@ -52,16 +52,19 @@ export default class AddCandidateHelper {
             cy.shortlistCandidate('PUT', URLs.shortlist(this.CandidateId), Payload)
         })
     }
-    static scheduleInterview() {
-        cy.scheduleInterview('POST', URLs.scheduleInterview(this.CandidateId), ScheduleInterviewInit.initScheduleInterview())
-            .then((response) => {
-                this.setInterviewId(response.data.id);
-            })
+    static scheduleInterview(): Cypress.Chainable<any> {
+        return cy.wrap(undefined).then(() => {
+            cy.scheduleInterview('POST', URLs.scheduleInterview(this.CandidateId), ScheduleInterviewInit.initScheduleInterview())
+                .then((response) => {
+                    this.setInterviewId(response.data.id);
+                    cy.log(response.data.id + '')
+                })
+        })
     }
     static markInterviewPassed(): Cypress.Chainable<any> {
         return cy.wrap(undefined).then(() => {
             const Payload = { note: null }
-            cy.markInterviewPassed('PUT', URLs.markInterviewPassed(this.CandidateId,this.getInterviewId()), Payload)
+            cy.markInterviewPassed('PUT', URLs.markInterviewPassed(this.CandidateId, this.getInterviewId()), Payload)
         })
     }
     static offerJob(): Cypress.Chainable<any> {
@@ -90,15 +93,16 @@ export default class AddCandidateHelper {
             })
         })
     }
-    
+
     static hireCandidate(): Cypress.Chainable<any> {
         return cy.wrap(undefined).then(() => {
-            //mark interview passed+ offer job + hire
-            this.markInterviewPassed().then(() => {
-                this.offerJob().then(() => {
-                    this.hire();
-                })
-            })
+            //shortlist + scheduled+ mark interview passed+ offer job + hire
+            this.shortlistCandidate()
+            this.scheduleInterview()
+            this.markInterviewPassed()
+            this.offerJob()
+            this.hire();
+
         })
     }
     static deleteCandidate() {
