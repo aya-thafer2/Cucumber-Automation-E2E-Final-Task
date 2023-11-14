@@ -29,7 +29,6 @@ export default class CandidateFormDialog {
             .click()
 
         this.clickSearch()
-        this.clickViewDetails();
     }
     static clickSearch() {
         this.elements.Btns().contains('Search').click({ force: true });
