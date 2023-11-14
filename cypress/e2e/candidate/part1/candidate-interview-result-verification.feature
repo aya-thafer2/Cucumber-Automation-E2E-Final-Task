@@ -1,8 +1,6 @@
 Feature: Candidate Interview Result Verification Pass/Fail
 
     Scenario: Admin transitions candidate status from "Interview Scheduled" to "Interview Passed"
-        Given the Employee, Job Title and Vacancy are created
-        And the candidate status is "Interview Scheduled"
 
         When the Admin logs in to the system
         And the Admin accesses the candidate form
@@ -10,9 +8,7 @@ Feature: Candidate Interview Result Verification Pass/Fail
         Then the candidate status should be updated to "Interview Passed"
         And the available actions buttons for should be Reject, Schedule Interview, Offer Job
 
-Scenario: Admin transitions candidate status from "Interview Scheduled" to "Interview Failed"
-        Given the Employee, Job Title and Vacancy are created
-        And the candidate status is "Interview Scheduled"
+    Scenario: Admin transitions candidate status from "Interview Scheduled" to "Interview Failed"
 
         When the Admin logs in to the system
         And the Admin accesses the candidate form
