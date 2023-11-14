@@ -7,7 +7,8 @@ import AddCandidateHelper from '../../../support/helpers/recruitment-page/add-ca
 import CandidateFormHelper from '../../../support/helpers/recruitment-page/candidate-form-dialog/candidate-form-helper';
 import CandidateFormDialog from '../../../support/POM/recruitment-page/candidates-tab/candidate-form-dialog/candidate-form-dialog';
 
-Given('the Employee, Job Title and Vacancy are created', () => {
+
+beforeEach('the Employee, Job Title and Vacancy are created', () => {
   //Admin login 
   GenericHelper.adminLogin()
   //Add new Employee
@@ -18,10 +19,17 @@ Given('the Employee, Job Title and Vacancy are created', () => {
     AddVacancyHelper.addVacancy();
   })
 });
-Given('the candidate status is {string}', (status: string) => {
-  //create candidate + shortlist + scheduled
-  AddCandidateHelper.prepareCandidateForInterview().then(() => {
-    AddCandidateHelper.checkApplicationStageStatus(status);
+beforeEach('the candidate status is Application Initiated', () => {
+  //create candidate
+  AddCandidateHelper.addCandidate().then(() => {
+    AddCandidateHelper.checkApplicationStageStatus('Application Initiated');
+  })
+  AddEmployeeDialogHelper.logout();
+})
+Given('the candidate status is Hired', () => {
+  //hire candidate
+  AddCandidateHelper.hireCandidate().then(() => {
+    AddCandidateHelper.checkApplicationStageStatus('Hired');
   })
   AddEmployeeDialogHelper.logout();
 });
@@ -32,22 +40,26 @@ When('the Admin logs in to the system', () => {
 
 When('the Admin accesses the candidate form', () => {
   CandidateFormHelper.accessesCandidateForm()
+  CandidateFormDialog.clickViewDetails();
 });
 
-When('the Admin changes the candidate status to {string}', (newStatus: string) => {
-  CandidateFormHelper.changeCandidateStatus(newStatus)
+When("the Admin enables Edit candidate switch", () => {
+  CandidateFormDialog.clickEnableSwitch();
 });
 
-Then('the candidate status should be updated to {string}', (expectedStatus: string) => {
-  CandidateFormDialog.checkApplicationStageStatus(expectedStatus)
+When("the Admin Uploads a txt file to the Resume section and Saves the form", () => {
+  CandidateFormDialog.uploadFile();
 });
 
-Then('the available actions buttons for should be Reject, Schedule Interview, Offer Job', () => {
-  CandidateFormDialog.checkPassAvailableButtonActions()
+When("the Admin Downloads the uploaded file", () => {
+  CandidateFormHelper.accessesCandidateForm();
+  CandidateFormDialog.clickDownloadBtn();
 });
-Then('the available actions buttons for should be Reject', () => {
-    CandidateFormDialog.checkFailAvailableButtonActions()
+
+Then("the downloaded file content should match the uploaded data", () => {
+  CandidateFormHelper.verifyFileContent();
 });
+
 afterEach(() => {
   //delete employee
   AddEmployeeDialogHelper.deleteEmployee()

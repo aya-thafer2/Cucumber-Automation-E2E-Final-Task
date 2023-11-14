@@ -6,9 +6,12 @@ export default defineConfig({
   e2e: {
     baseUrl: 'https://opensource-demo.orangehrmlive.com',
     specPattern: "cypress/e2e/**/*.feature",
-    async setupNodeEvents(on: any,config: any){
+    async setupNodeEvents(on: any, config: any) {
       require('cypress-mochawesome-reporter/plugin')(on);
       return require("./cypress/plugins")(on, config);
     },
+  },
+  env: {
+    download_dir: "./cypress/downloads",
   },
 });

@@ -8,7 +8,8 @@ export default class CandidateFormDialog {
         Btns: () => cy.get('button'),
         inputFields: () => cy.get('.oxd-input-group'),
         mainMenuItems: () => cy.get('.oxd-sidepanel-body'),
-
+        enableSwitch: () => cy.get('.oxd-switch-input'),
+        uploadFileField: () => cy.get('input[type="file"]'),
 
     }
     static goToRecruitmentPage() {
@@ -29,7 +30,6 @@ export default class CandidateFormDialog {
             .click()
 
         this.clickSearch()
-        this.clickViewDetails();
     }
     static clickSearch() {
         this.elements.Btns().contains('Search').click({ force: true });
@@ -37,15 +37,15 @@ export default class CandidateFormDialog {
     static clickViewDetails() {
         cy.get('.oxd-icon-button i.bi-eye-fill').click({ force: true });
     }
-
+    static clickDownloadBtn() {
+        cy.get('.oxd-icon-button i.bi-download').click({ force: true });
+    }
     static clickMarkInterviewBtn(status: string) {
         this.elements.Btns().contains('Mark ' + status).click({ force: true })
         this.clickSave();
     }
     static clickSave() {
         this.elements.Btns().contains('Save').click()
-        // cy.visit(`https://opensource-demo.orangehrmlive.com/web/index.php/recruitment/addCandidate/${AddCandidateHelper.getCandidateId()}`)
-
     }
 
     static checkApplicationStageStatus(status: string) {
@@ -53,9 +53,6 @@ export default class CandidateFormDialog {
     }
 
     static checkPassAvailableButtonActions() {
-
-        // cy.get('.orangehrm-recruitment-actions').should('have.text', expectedButtons);
-
         cy.get('.orangehrm-recruitment-actions').should(($container) => {
             expect($container).to.contain('Reject');
             expect($container).to.contain('Schedule Interview');
@@ -63,11 +60,17 @@ export default class CandidateFormDialog {
         });
     }
     static checkFailAvailableButtonActions() {
-
-        // cy.get('.orangehrm-recruitment-actions').should('have.text', expectedButtons);
-
         cy.get('.orangehrm-recruitment-actions').should(($container) => {
             expect($container).to.contain('Reject');
         });
     }
+    static clickEnableSwitch(){
+        this.elements.enableSwitch().click({force:true})
+    }
+    static uploadFile(){
+        const file = 'cypress/fixtures/candidate/resume.txt';
+        this.elements.uploadFileField().selectFile(file, { force: true });
+        this.elements.Btns().contains('Save').click( { force: true })
+    }
+
 }

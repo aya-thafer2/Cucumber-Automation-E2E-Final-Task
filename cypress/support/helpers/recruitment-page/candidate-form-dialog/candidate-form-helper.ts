@@ -9,4 +9,12 @@ export default class CandidateFormHelper {
     static changeCandidateStatus(status: string) {
         CandidateFormDialog.clickMarkInterviewBtn(status)
     }
+    static verifyFileContent() {
+        const downloadedFilePath = 'cypress/downloads/resume.txt';
+        cy.fixture('candidate/resume.txt').then((actualFile) => {
+            cy.readFile(downloadedFilePath).then((downloadedFile) => {
+                expect(downloadedFile).to.equal(actualFile);
+            });
+        });
+    }
 }

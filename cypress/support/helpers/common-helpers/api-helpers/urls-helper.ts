@@ -6,4 +6,7 @@ export const URLs = {
     candidate: `/web/index.php/api/v2/recruitment/candidates`,
     shortlist: (candidateId: number) => { return `/web/index.php/api/v2/recruitment/candidates/${candidateId}/shortlist` },
     scheduleInterview: (candidateId: number) => { return `/web/index.php/api/v2/recruitment/candidates/${candidateId}/shedule-interview` },
+    markInterviewPassed: (candidateId: number, interviewId: number) => { return `/web/index.php/api/v2/recruitment/candidates/${candidateId}/interviews/${interviewId}/pass` },
+    offerJob: (candidateId: number) => { return `/web/index.php/api/v2/recruitment/candidates/${candidateId}/job/offer` },
+    hire: (candidateId: number) => { return `/web/index.php/api/v2/recruitment/candidates/${candidateId}/hire` },
 };

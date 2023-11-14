@@ -32,6 +32,7 @@ When('the Admin logs in to the system', () => {
 
 When('the Admin accesses the candidate form', () => {
   CandidateFormHelper.accessesCandidateForm()
+  CandidateFormDialog.clickViewDetails();
 });
 
 When('the Admin changes the candidate status to {string}', (newStatus: string) => {

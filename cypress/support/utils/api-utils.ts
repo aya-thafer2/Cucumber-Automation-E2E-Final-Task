@@ -7,6 +7,9 @@ import { ICreateAddEmployeeResponse } from "../interfaces/apis/response/PIM-page
 import { ICreateJobResponse } from "../interfaces/apis/response/admin-page/job-dialog/job-response";
 import { ICreateCommonDeleteResponse } from "../interfaces/apis/response/common-response/delete-response";
 import { ICreateAddCandidateResponse } from "../interfaces/apis/response/recruitment-page/add-candidate-dialog/add-candidate-response";
+import { ICreateHireResponse } from "../interfaces/apis/response/recruitment-page/add-candidate-dialog/hire-response";
+import { ICreateMarkInterviewPassedResponse } from "../interfaces/apis/response/recruitment-page/add-candidate-dialog/mark-interview-passed-response";
+import { ICreateOfferJobResponse } from "../interfaces/apis/response/recruitment-page/add-candidate-dialog/offer-job-response";
 import { ICreateScheduleInterviewResponse } from "../interfaces/apis/response/recruitment-page/add-candidate-dialog/schedule-interview-response";
 import { ICreateShortlistResponse } from "../interfaces/apis/response/recruitment-page/add-candidate-dialog/shortlist-reponse";
 import { ICreateAddVacancyResponse } from "../interfaces/apis/response/recruitment-page/add-vacancy-dialog/add-vacancy-response";
@@ -21,6 +24,9 @@ declare global {
             createCandidate: (method: string, url: string, payload: ICreateAddCandidatePayload) => Chainable<ICreateAddCandidateResponse>;
             shortlistCandidate: (method: string, url: string, payload: any) => Chainable<ICreateShortlistResponse>;
             scheduleInterview: (method: string, url: string, payload: ICreateScheduleInterviewPayload) => Chainable<ICreateScheduleInterviewResponse>;
+            markInterviewPassed: (method: string, url: string, payload: any) => Chainable<ICreateMarkInterviewPassedResponse>;
+            offerJob: (method: string, url: string, payload: any) => Chainable<ICreateOfferJobResponse>;
+            hire: (method: string, url: string, payload: any) => Chainable<ICreateHireResponse>;
 
         }
     }
@@ -41,6 +47,9 @@ Cypress.Commands.add('addVacancy', apiRequest)
 Cypress.Commands.add('createCandidate', apiRequest)
 Cypress.Commands.add('shortlistCandidate', apiRequest)
 Cypress.Commands.add('scheduleInterview', apiRequest)
+Cypress.Commands.add('markInterviewPassed', apiRequest)
+Cypress.Commands.add('offerJob', apiRequest)
+Cypress.Commands.add('hire', apiRequest)
 
 
 

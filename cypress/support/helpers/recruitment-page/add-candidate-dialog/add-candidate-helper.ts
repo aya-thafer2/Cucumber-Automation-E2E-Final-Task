@@ -1,14 +1,16 @@
+import CandidateFormDialog from "../../../POM/recruitment-page/candidates-tab/candidate-form-dialog/candidate-form-dialog";
 import AddCandidateInit from "../../../initializers/recruitment-page/add-candidate-dialog/add-candidate-init";
 import ScheduleInterviewInit from "../../../initializers/recruitment-page/add-candidate-dialog/schedule-interview-init";
 import CommonAPIHelper from "../../common-helpers/api-helpers/common-api-helper";
 import { URLs } from "../../common-helpers/api-helpers/urls-helper";
+import CandidateFormHelper from "../candidate-form-dialog/candidate-form-helper";
 
 export default class AddCandidateHelper {
 
     private static CandidateId: number;
     private static CandidateFullName: string;
     private static CandidateFirstName: string;
-    private static InterviewId:number;
+    private static InterviewId: number;
 
     static setCandidateId(CandidateId: number) {
         this.CandidateId = CandidateId;
@@ -52,8 +54,26 @@ export default class AddCandidateHelper {
     }
     static scheduleInterview() {
         cy.scheduleInterview('POST', URLs.scheduleInterview(this.CandidateId), ScheduleInterviewInit.initScheduleInterview())
-        .then((response)=>{
-            this.setInterviewId(response.data.id);
+            .then((response) => {
+                this.setInterviewId(response.data.id);
+            })
+    }
+    static markInterviewPassed(): Cypress.Chainable<any> {
+        return cy.wrap(undefined).then(() => {
+            const Payload = { note: null }
+            cy.markInterviewPassed('PUT', URLs.markInterviewPassed(this.CandidateId,this.getInterviewId()), Payload)
+        })
+    }
+    static offerJob(): Cypress.Chainable<any> {
+        return cy.wrap(undefined).then(() => {
+            const Payload = { note: null }
+            cy.offerJob('PUT', URLs.offerJob(this.CandidateId), Payload)
+        })
+    }
+    static hire(): Cypress.Chainable<any> {
+        return cy.wrap(undefined).then(() => {
+            const Payload = { note: null }
+            cy.hire('PUT', URLs.hire(this.CandidateId), Payload)
         })
     }
     static checkApplicationStageStatus(status: string) {
@@ -61,6 +81,7 @@ export default class AddCandidateHelper {
         cy.get('.orangehrm-recruitment-status').should('contain', status)
     }
     static prepareCandidateForInterview(): Cypress.Chainable<any> {
+        //create candidate + shortlist + scheduled
         return cy.wrap(undefined).then(() => {
             this.addCandidate().then(() => {
                 this.shortlistCandidate().then(() => {
@@ -69,7 +90,17 @@ export default class AddCandidateHelper {
             })
         })
     }
-
+    
+    static hireCandidate(): Cypress.Chainable<any> {
+        return cy.wrap(undefined).then(() => {
+            //mark interview passed+ offer job + hire
+            this.markInterviewPassed().then(() => {
+                this.offerJob().then(() => {
+                    this.hire();
+                })
+            })
+        })
+    }
     static deleteCandidate() {
         CommonAPIHelper.delete(URLs.candidate, [this.getCandidateId()])
     }
