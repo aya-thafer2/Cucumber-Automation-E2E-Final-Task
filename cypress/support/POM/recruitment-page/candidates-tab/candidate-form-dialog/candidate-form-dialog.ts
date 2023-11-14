@@ -44,8 +44,6 @@ export default class CandidateFormDialog {
     }
     static clickSave() {
         this.elements.Btns().contains('Save').click()
-        // cy.visit(`https://opensource-demo.orangehrmlive.com/web/index.php/recruitment/addCandidate/${AddCandidateHelper.getCandidateId()}`)
-
     }
 
     static checkApplicationStageStatus(status: string) {
@@ -53,9 +51,6 @@ export default class CandidateFormDialog {
     }
 
     static checkPassAvailableButtonActions() {
-
-        // cy.get('.orangehrm-recruitment-actions').should('have.text', expectedButtons);
-
         cy.get('.orangehrm-recruitment-actions').should(($container) => {
             expect($container).to.contain('Reject');
             expect($container).to.contain('Schedule Interview');
@@ -63,9 +58,6 @@ export default class CandidateFormDialog {
         });
     }
     static checkFailAvailableButtonActions() {
-
-        // cy.get('.orangehrm-recruitment-actions').should('have.text', expectedButtons);
-
         cy.get('.orangehrm-recruitment-actions').should(($container) => {
             expect($container).to.contain('Reject');
         });
