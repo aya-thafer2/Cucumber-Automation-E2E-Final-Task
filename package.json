@@ -1,12 +1,16 @@
 {
   "devDependencies": {
+    "@faker-js/faker": "^8.2.0",
     "cypress": "^13.5.0",
+    "cypress-mochawesome-reporter": "^3.6.1",
     "typescript": "^5.2.2"
   },
   "dependencies": {
     "@badeball/cypress-cucumber-preprocessor": "^19.1.0",
     "@bahmutov/cypress-esbuild-preprocessor": "^2.2.0",
-    "esbuild": "^0.19.5"
+    "cypress-plugin-api": "^2.11.1",
+    "esbuild": "^0.19.5",
+    "moment": "^2.29.4"
   },
   "cypress-cucumber-preprocessor": {
     "stepDefinitions": [

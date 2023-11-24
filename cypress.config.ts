@@ -1,24 +1,17 @@
 const { defineConfig } = require("cypress");
-const createBundler = require("@bahmutov/cypress-esbuild-preprocessor");
-const addCucumberPreprocessorPlugin = require("@badeball/cypress-cucumber-preprocessor").addCucumberPreprocessorPlugin;
-const createEsBuildPlugin = require("@badeball/cypress-cucumber-preprocessor/esbuild").createEsbuildPlugin;
 
 export default defineConfig({
+  reporter: 'cypress-mochawesome-reporter',
+  video: true,
   e2e: {
     baseUrl: 'https://opensource-demo.orangehrmlive.com',
     specPattern: "cypress/e2e/**/*.feature",
-    async setupNodeEvents(
-      on: Cypress.PluginEvents,
-      config: Cypress.PluginConfigOptions
-    ): Promise<Cypress.PluginConfigOptions> {
-      await addCucumberPreprocessorPlugin(on, config);
-      on(
-        "file:preprocessor",
-        createBundler({
-          plugins: [createEsBuildPlugin(config)],
-        })
-      );
-      return config;
+    async setupNodeEvents(on: any, config: any) {
+      require('cypress-mochawesome-reporter/plugin')(on);
+      return require("./cypress/plugins")(on, config);
     },
+  },
+  env: {
+    download_dir: "./cypress/downloads",
   },
 });
